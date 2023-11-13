@@ -7,10 +7,10 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    /* with blade project
     public function index(){
         $products = Product::all();
         return view('products.index', ['products' => $products]);
-        
     }
 
     public function create(){
@@ -53,4 +53,5 @@ class ProductController extends Controller
         $product->delete();
         return redirect(route('product.index'))->with('success', 'Product deleted Succesffully');
     }
+    */
 }

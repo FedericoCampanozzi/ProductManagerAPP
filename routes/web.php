@@ -35,12 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/demo-request', function() {
-    return response()->json(['message' => 'Get request successful']);
-});
-
-Route::post('/demo-post', function (Request $request) {
-    return response()->json(['message' => 'Post request successful']);
-});
+/* my api */
+/* ***** */
 
 require __DIR__.'/auth.php';

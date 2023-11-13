@@ -1,15 +1,14 @@
 import './bootstrap';
 import { createApp } from 'vue';
-import ComponentA from './components/MyComponents/ComponentA.vue';
-import ComponentB from './components/MyComponents/ComponentB.vue';
-//import Welcome from './Pages/Welcome.vue';
+import EditDialog from './Pages/Product/EditDialog.vue';
+import Create from './Pages/Product/Create.vue';
+import ProductTable from './Pages/Product/ProductTable.vue';
 
 const app = createApp({});
 
 app
-  .component('ComponentA', ComponentA)
-  //.component('Head', ComponentA)
-  //.component('Welcome', Welcome);
-  .component('ComponentB', ComponentB);
+  .component('EditDialog', EditDialog)
+  .component('Create', Create)
+  .component('ProductTable', ProductTable);
 
 app.mount("#app");

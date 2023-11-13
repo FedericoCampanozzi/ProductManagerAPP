@@ -11,12 +11,13 @@
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Scripts -->
+        @routes
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @inertiaHead
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100" id="app">
-            <component-a></component-a>
-            <component-b par1="ciao"></component-b>
+            <product-table></product-table>
         </div>
     </body>
 </html>
