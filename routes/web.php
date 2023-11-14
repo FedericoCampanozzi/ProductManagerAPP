@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicPageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +38,11 @@ Route::middleware('auth')->group(function () {
 });
 
 /* my api */
+Route::get('/', [PublicPageController::class, 'edit'])->name('public.page.index');
+Route::get('/profile', [ProductController::class, 'edit'])->name('public.page.create');
+Route::get('/create', [ProductController::class, 'edit'])->name('product.create');
+Route::get('/', [ProductController::class, 'edit'])->name('product.delete');
+Route::get('/', [ProductController::class, 'edit'])->name('product.update');
 /* ***** */
 
 require __DIR__.'/auth.php';
