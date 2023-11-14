@@ -8,19 +8,11 @@ use Inertia\Inertia;
 
 class PublicPageController extends Controller
 {
+    /*
     public function indexpage () {
-        return Inertia::render('Pizzas/EditPizzaStatus', [
-            "pizza" => $pizza,
-            "next_status" => $next_status,
-            "isChef" => $isChef
+        return Inertia::render('Product/ProductTable', [
+            "products" => Product::all()->toArray(),
         ]);
     }
-
-    public function editpage () {
-        return Inertia::render('Pizzas/EditPizzaStatus', [
-            "pizza" => $pizza,
-            "next_status" => $next_status,
-            "isChef" => $isChef
-        ]);
-    }
+    */
 }

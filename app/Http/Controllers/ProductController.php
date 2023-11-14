@@ -54,6 +54,11 @@ class ProductController extends Controller
         return redirect(route('product.index'))->with('success', 'Product deleted Succesffully');
     }
     */
+    
+    public function get(){
+        return response()->json(['products' => Product::all()->toArray()]);
+    }
+
     public function create(Product $product, Request $request){
         $data = $request->validate([
             'name' => 'required',

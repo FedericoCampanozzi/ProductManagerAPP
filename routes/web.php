@@ -38,11 +38,11 @@ Route::middleware('auth')->group(function () {
 });
 
 /* my api */
-Route::get('/', [PublicPageController::class, 'edit'])->name('public.page.index');
-Route::get('/profile', [ProductController::class, 'edit'])->name('public.page.create');
-Route::get('/create', [ProductController::class, 'edit'])->name('product.create');
-Route::get('/', [ProductController::class, 'edit'])->name('product.delete');
-Route::get('/', [ProductController::class, 'edit'])->name('product.update');
+//Route::get('/', [PublicPageController::class, 'indexpage'])->name('public.page.index');
+Route::get('/product-select', [ProductController::class, 'get']);
+//Route::path('/', [ProductController::class, 'create'])->name('product.insert');
+//Route::path('/', [ProductController::class, 'destroy'])->name('product.delete');
+//Route::path('/', [ProductController::class, 'update'])->name('product.update');
 /* ***** */
 
 require __DIR__.'/auth.php';
