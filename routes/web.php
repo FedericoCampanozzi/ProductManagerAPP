@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
 });
 
 /* my api */
-//Route::get('/', [PublicPageController::class, 'indexpage'])->name('public.page.index');
+Route::get('/abcd', [PublicPageController::class, 'indexpage'])->name('public.page.index');
 Route::get('/product-select', [ProductController::class, 'get']);
 //Route::path('/', [ProductController::class, 'create'])->name('product.insert');
 //Route::path('/', [ProductController::class, 'destroy'])->name('product.delete');

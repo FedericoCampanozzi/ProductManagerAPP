@@ -1,6 +1,7 @@
 <script setup>
     import { computed } from 'vue';
-
+    import NavLink from './NavLink.vue';
+    
     const props = defineProps({
         items: {
             type: Array,
@@ -98,7 +99,9 @@
                         </td>
 
                         <td scope="row" v-if="action != null">
-                            {{actionlabel}}
+                            <NavLink :href="action">
+                                {{ actionlabel }}
+                            </NavLink>
                         </td>
                     </tr>
                 </tbody>

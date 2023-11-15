@@ -10,5 +10,5 @@ app
   .component('EditDialog', EditDialog)
   .component('Create', Create)
   .component('ProductTable', ProductTable);
-
+// caricare la componente specificata da Initia
 app.mount("#app");

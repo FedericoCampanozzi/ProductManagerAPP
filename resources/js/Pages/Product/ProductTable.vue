@@ -4,17 +4,21 @@ import Create from "@/Pages/Product/Create.vue"
 </script>
 
 <template>
-    <div class="py-12">
+    <div class="py-5">
+      <div class="my-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <TableRenderer :items="products" :columns="columns" :primary='"id"' />
+                <TableRenderer :items="products" :columns="columns" :primary='"id"' action="/abcd" />
             </div>
         </div>
-    </div>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      </div>
+      <div class="my-container">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <Create />
+          </div>
         </div>
+      </div>
     </div>
 </template>
 
