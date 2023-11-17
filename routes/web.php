@@ -1,28 +1,12 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PublicPageController;
 
-/*
-Route::middleware("guest")->group(function () {
-    Route::get("/login", [HomeController::class, "login"])->name("login");
-    Route::post("/authenticate", [HomeController::class, "authenticate"])->name("authenticate");
-});*/
+Route::get("/", [PublicPageController::class, "index"]);
+Route::get("/home", [PublicPageController::class, "index"])->name("home");
+Route::get("/index", [PublicPageController::class, "index"])->name("index");
+Route::get("/login", [PublicPageController::class, "index"])->name("login");
 
-Route::get("/login", [HomeController::class, "login"])->name("login");
-Route::get("/settings", [HomeController::class, "settings"])->name("settings");
-
-
-Route::middleware("auth")->group(
-    function () {
-        Route::get('/', [HomeController::class, 'home']);
-        //Route::get('/settings', [HomeController::class, 'settings']);
-        Route::get('/users', [HomeController::class, 'users']);
-        Route::get('/users/create', [HomeController::class, 'userCreate'])->can("create", User::class);
-        Route::post('/users/insert', [HomeController::class, 'userInsert']);
-        Route::post("/logout", [HomeController::class, "logout"]);
-    }
-);
-
-//require __DIR__.'/auth.php';
+Route::get("/create", [PublicPageController::class, "create_product_page"])->name("create");
+Route::get("/edit/{id}", [PublicPageController::class, "edit_product_page"])->name("edit");
