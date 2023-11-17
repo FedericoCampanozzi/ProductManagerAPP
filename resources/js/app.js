@@ -1,3 +1,4 @@
+/*
 import './bootstrap';
 import { createApp } from 'vue';
 import EditDialog from './Pages/Product/EditDialog.vue';
@@ -11,4 +12,24 @@ app
   .component('Create', Create)
   .component('ProductTable', ProductTable);
 // caricare la componente specificata da Initia
-app.mount("#app");
+app.mount("#app");*/
+
+require('./bootstrap');
+
+import { InertiaApp } from '@inertiajs/inertia-vue'
+import Vue from 'vue'
+
+Vue.use(InertiaApp)
+
+const app = document.getElementById('app')
+
+if(app) {
+    new Vue({
+      render: h => h(InertiaApp, {
+        props: {
+          initialPage: JSON.parse(app.dataset.page),
+          resolveComponent: name => require(`./Pages/${name}`).default,
+        },
+      }),
+    }).$mount(app)    
+}
