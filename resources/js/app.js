@@ -1,35 +1,39 @@
-/*
-import './bootstrap';
-import { createApp } from 'vue';
-import EditDialog from './Pages/Product/EditDialog.vue';
-import Create from './Pages/Product/Create.vue';
-import ProductTable from './Pages/Product/ProductTable.vue';
+import { createApp, h } from "vue";
+import NProgress from "nprogress";
+import { createInertiaApp, router, Head, Link } from "@inertiajs/vue3";
+//import Layout from "./pages/shared/Layout.vue";
 
-const app = createApp({});
+createInertiaApp({
+    resolve: (name) => {
+        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+        let page = pages[`./Pages/${name}.vue`];
+        /*if (page.default.layout === undefined) {
+            page.default.layout = page.default.layout || Layout;
+        }*/
+        return page;
+    },
+    //__Use head or any other componets for automatically import that all the pages__//
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .component("Head", Head)
+            .component("Link", Link)
+            .mount(el);
+    },
 
-app
-  .component('EditDialog', EditDialog)
-  .component('Create', Create)
-  .component('ProductTable', ProductTable);
-// caricare la componente specificata da Initia
-app.mount("#app");*/
+    //__Use title for all the components & pages__//
+    title: (title) => `My App - ${title}`,
+    progress: {
+        // The delay after which the progress bar will appear, in milliseconds...
+        delay: 250,
 
-require('./bootstrap');
+        // The color of the progress bar...
+        color: "red",
 
-import { InertiaApp } from '@inertiajs/inertia-vue'
-import Vue from 'vue'
+        // Whether to include the default NProgress styles...
+        includeCSS: true,
+    },
+});
 
-Vue.use(InertiaApp)
-
-const app = document.getElementById('app')
-
-if(app) {
-    new Vue({
-      render: h => h(InertiaApp, {
-        props: {
-          initialPage: JSON.parse(app.dataset.page),
-          resolveComponent: name => require(`./Pages/${name}`).default,
-        },
-      }),
-    }).$mount(app)    
-}
+router.on("start", () => NProgress.start());
+router.on("finish", () => NProgress.done());
