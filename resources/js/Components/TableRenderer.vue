@@ -28,16 +28,6 @@
             type: String,
             required: false,
             default: "Zero Result"
-        },
-        action: {
-            type: String,
-            required: false,
-            default: "pinco"
-        },
-        actionlabel: {
-            type: String,
-            required: false,
-            default: "View Details"
         }
     });
 
@@ -98,9 +88,9 @@
                            {{ item[column.value] }}
                         </td>
 
-                        <td scope="row" v-if="action != null">
-                            <NavLink :href="action">
-                                {{ actionlabel }}
+                        <td scope="row">
+                            <NavLink :href='"/show/" + item.id'>
+                                <i class="pi pi-search" style="font-size: 2rem"></i>
                             </NavLink>
                         </td>
                     </tr>

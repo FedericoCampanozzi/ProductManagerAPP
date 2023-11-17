@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.my-form {
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 50%;
+}
+
+.my-form-33 {
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 33%;
+}
+
+.my-form input, .my-form-33 input {
+    min-height: 36px;
+    padding: 6px 12px;
+}
+
+.my-container {
+    margin: 20px;
+}

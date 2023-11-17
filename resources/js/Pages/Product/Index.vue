@@ -7,7 +7,7 @@ import TableRenderer from '@/Components/TableRenderer.vue';
       <div class="my-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <TableRenderer :items="products" :columns="columns" :primary='"id"' action="/abcd" />
+                <TableRenderer :items="products" :columns="columns" :primary='"id"'/>
             </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getAllProduct() {
-      axios.get('/product-select')
+      axios.get('/select-product')
         .then(response => {
           this.products = response.data['products'];
         });
