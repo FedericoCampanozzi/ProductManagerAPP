@@ -69,7 +69,7 @@
 
                 <tbody v-if="items.length == 0">
                     <tr :class="tr_class">
-                        <td :class="td_class" colspan={{ columns.length + 3 }}>
+                        <td :class="td_class" :colspan="props.columns.length + 3">
                             {{noResultLabel}}
                         </td>
                     </tr>
@@ -89,12 +89,24 @@
                         </td>
 
                         <td scope="row">
+                            <NavLink :href='"/edit/" + item.id'>
+                                Edit
+                            </NavLink>
                             <NavLink :href='"/show/" + item.id'>
-                                <i class="pi pi-search" style="font-size: 2rem"></i>
+                                Detail
                             </NavLink>
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr :class="tr_class">
+                        <td :class="td_class" :colspan="props.columns.length + 3">                            
+                            <NavLink :href='"/create"'>
+                                Insert a new product
+                            </NavLink>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
 </template>

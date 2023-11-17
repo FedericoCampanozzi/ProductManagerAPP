@@ -50,14 +50,9 @@ const destroy = () => {
 };
 
 const insert = () => {
-    /*
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-    */
-   console.log("product = ",props.product);
+    console.log("product = ", props.product);
+    route('product.insert', [props.product]);
 };
-
 
 const label = computed(() => props.canEdit ? "Edit or Delete this product" : props.canInsert ? "Insert a new product" : "See this product");
 const forceDisabled = computed(() => !props.canEdit && !props.canInsert );
