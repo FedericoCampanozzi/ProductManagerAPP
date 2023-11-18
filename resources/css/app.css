@@ -26,3 +26,9 @@
 .my-container {
     margin: 20px;
 }
+
+.my-bg-detail {
+    background-color: rgb(252, 252, 252);
+    border-radius: 25px !important;
+    border: 2px rgb(182, 181, 181) solid !important;
+}

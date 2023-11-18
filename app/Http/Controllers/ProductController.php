@@ -14,21 +14,35 @@ class ProductController extends Controller
         return response()->json(['products' => Product::all()->toArray()]);
     }
 
-    public function insert(Product $product): RedirectResponse
+    public function insert(Request $request)
     {
+        $product = new Product();
+        $product->name = $request['product']['name'];
+        $product->qty = $request['product']['qty'];
+        $product->price = $request['product']['price'];
+        $product->description = $request['product']['description'];
+        $product->created_at = new \DateTime();
+        $product->updated_at = new \DateTime();
         $product->save();
-        return Redirect::route('index');
+        return response()->json(['new_location' => '/index']);
     }
 
-    public function update(Product $product): RedirectResponse
+    public function update(Request $request)
     {
+        $product = Product::find($request['product']['id']);
+        $product->name = $request['product']['name'];
+        $product->qty = $request['product']['qty'];
+        $product->price = $request['product']['price'];
+        $product->description = $request['product']['description'];
+        $product->updated_at = new \DateTime();
         $product->update();
-        return Redirect::route('index');
+        return response()->json(['new_location' => '/index']);
     }
 
-    public function delete(Product $product): RedirectResponse
+    public function delete(Request $request)
     {
+        $product = Product::find($request['product']['id']);
         $product->delete();
-        return Redirect::route('index');
+        return response()->json(['new_location' => '/index']);
     }
 }

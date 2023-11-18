@@ -1,9 +1,8 @@
 <script setup>
-import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useForm } from '@inertiajs/vue3';
+import axios from 'axios';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -21,38 +20,21 @@ const props = defineProps({
     },
 })
 
-const form = computed(() => useForm({
-    id: props.product.id,
-    product_name: props.product.name,
-    qty: props.product.qty,
-    prince: props.product.price,
-    description: props.product.description,
-    created_at: new Date(props.product.created_at).toLocaleString(),
-    updated_at: new Date(props.product.updated_at).toLocaleString(),
-}));
+const insert = () => {
+    axios.post("/insert-product", { product: props.product } ).then(res => {
+    });
+};
 
 const update = () => {
-    /*
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    axios.post("/update-product", { product: props.product }).then(res => {
     });
-    */
-   console.log("product = ",props.product);
 };
 
 const destroy = () => {
-    /*
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    axios.delete("/delete-product", { data: { product: props.product } }).then(res => {
     });
-    */
-   console.log("product = ",props.product);
 };
 
-const insert = () => {
-    console.log("product = ", props.product);
-    route('product.insert', [props.product]);
-};
 
 const label = computed(() => props.canEdit ? "Edit or Delete this product" : props.canInsert ? "Insert a new product" : "See this product");
 const forceDisabled = computed(() => !props.canEdit && !props.canInsert );
@@ -62,74 +44,106 @@ const forceDisabled = computed(() => !props.canEdit && !props.canInsert );
 <template>
     <div class="my-container">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="my-bg-detail overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-5" v-if="product != null">
                     <h1><strong>{{ label }}</strong></h1>
-                    <form>
                         <div class="p-5">
                             <div class="my-form-33">
-                                <InputLabel for="id" value="ID" />
-                                <TextInput id="id" type="number" v-model="form.id" disabled/>
-                                <InputError class="mt-2" :message="form.errors.id" />                                
+                                <InputLabel 
+                                    for="id" 
+                                    value="ID" />
+                                <TextInput 
+                                    id="id" 
+                                    type="number" 
+                                    v-model="props.product.id"
+                                    disabled />
                             </div>
                             <div class="my-form-33">
-                                <InputLabel for="created_at" value="Create ON" />
-                                <TextInput id="created_at" type="text" v-model="form.created_at" disabled/>
-                                <InputError class="mt-2" :message="form.errors.created_at" />
+                                <InputLabel 
+                                    for="created_at" 
+                                    value="Create ON" />
+                                <TextInput 
+                                    id="created_at" 
+                                    type="text" 
+                                    v-model="props.product.created_at" 
+                                    disabled />
                             </div>
                             <div class="my-form-33">
-                                <InputLabel for="updated_at" value="Update ON" />
-                                <TextInput id="updated_at" type="text" v-model="form.updated_at" disabled/>
-                                <InputError class="mt-2" :message="form.errors.updated_at" />
+                                <InputLabel 
+                                    for="updated_at" 
+                                    value="Update ON" />
+                                <TextInput 
+                                    id="updated_at" 
+                                    type="text" 
+                                    v-model="props.product.updated_at" 
+                                    disabled />
                             </div>
                         </div>
                         <div class="p-5 my-form">
-                            <InputLabel for="product_name" value="Product Name" />
-                            <TextInput id="product_name" type="text" class="mt-1 block w-full" v-model="form.product_name" required :disabled="forceDisabled"/>
-                            <InputError class="mt-2" :message="form.errors.product_name" />
+                            <InputLabel
+                                for="product_name" 
+                                value="Product Name" />
+                            <TextInput 
+                                id="product_name" 
+                                type="text" 
+                                class="mt-1 block w-full" 
+                                v-model="props.product.name" 
+                                :disabled="forceDisabled"
+                                required />
                         </div>
                         <div class="p-5 my-form">
-                            <InputLabel for="qty" value="Qt.à" />
-                            <TextInput id="qty" type="numeric" class="mt-1 block w-full" v-model="form.qty" required :disabled="forceDisabled"/>
-                            <InputError class="mt-2" :message="form.errors.qty" />
+                            <InputLabel 
+                                for="qty" 
+                                value="Qt.à" />
+                            <TextInput id="qty" 
+                                type="numeric" 
+                                class="mt-1 block w-full" 
+                                v-model="props.product.qty" 
+                                required :disabled="forceDisabled" />
                         </div>
                         <div class="p-5 my-form">
-                            <InputLabel for="prince" value="Price" />
-                            <TextInput id="prince" type="numeric" class="mt-1 block w-full" v-model="form.prince" required :disabled="forceDisabled"/>
-                            <InputError class="mt-2" :message="form.errors.prince" />
+                            <InputLabel 
+                                for="price" 
+                                value="Price" />
+                            <TextInput 
+                                id="price" 
+                                type="numeric" 
+                                class="mt-1 block w-full" 
+                                v-model="props.product.price" 
+                                :disabled="forceDisabled"
+                                required />
                         </div>
                         <div class="p-5 my-form">
-                            <InputLabel for="description" value="Description" />
-                            <TextInput id="description" type="text" class="mt-1 block w-full" v-model="form.description" :disabled="forceDisabled"/>
-                            <InputError class="mt-2" :message="form.errors.description" />
+                            <InputLabel 
+                                for="description" 
+                                value="Description" />
+                            <TextInput 
+                                id="description"
+                                type="text" 
+                                class="mt-1 block w-full" 
+                                v-model="props.product.description" 
+                                :disabled="forceDisabled" />
                         </div>
                         <div>
                             <PrimaryButton 
                                 v-if="canInsert"
                                 style="margin-left: 1.25em;" 
-                                :class="{ 'opacity-25': form.processing }" 
-                                :disabled="form.processing"
                                 @click="insert">
                                     Insert
                             </PrimaryButton>
                             <PrimaryButton 
                                 v-if="canEdit"
                                 style="margin-left: 1.25em;" 
-                                :class="{ 'opacity-25': form.processing }" 
-                                :disabled="form.processing"
                                 @click="update">
                                     Update
                             </PrimaryButton>
                             <PrimaryButton
                                 v-if="canEdit"
                                 style="margin-left: 1.25em; background-color: rgb(189, 0, 0) !important; color: white;" 
-                                :class="{ 'opacity-25': form.processing }" 
-                                :disabled="form.processing"
                                 @click="destroy">
                                     Delete
                             </PrimaryButton>
                         </div>
-                    </form>
                 </div>
                 <div class="p-5" v-if="product == null">
                     <h1>This product don't exist in this database</h1>

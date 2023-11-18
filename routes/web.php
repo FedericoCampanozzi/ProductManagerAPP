@@ -16,7 +16,7 @@ Route::get("/show/{id}", [PublicPageController::class, "show_product_page"])->na
 
 /* API Method */
 Route::get('/select-product', [ProductController::class, 'get'])->name("product.select");
-Route::post('/insert-product/{product}', [ProductController::class, 'insert'])->name("product.insert");
-Route::delete('/delete-product/{product}', [ProductController::class, 'delete'])->name("product.delete");
-Route::put('/update-product/{product}', [ProductController::class, 'update'])->name("product.update");
+Route::post('/insert-product', [ProductController::class, 'insert'])->name("product.insert");
+Route::delete('/delete-product', [ProductController::class, 'delete'])->name("product.delete");
+Route::post('/update-product', [ProductController::class, 'update'])->name("product.update");
 /* *********** */
