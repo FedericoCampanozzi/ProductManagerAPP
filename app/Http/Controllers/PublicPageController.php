@@ -8,12 +8,48 @@ use DateTime;
 
 class PublicPageController extends Controller
 {
+    /**
+     * @OA\Get(
+     *      path="/",
+     *      summary="Get table with all products",
+     *      tags={"PublicPageController"},
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *      )
+     * )
+     */
     public function index(){
         return Inertia::render("Product/Index",[
             "products" => Product::all()
         ]);
     }
-
+    
+    /**
+     * @OA\Get(
+     *      path="/edit/{id}",
+     *      summary="Get the edit page. In there you can update or delete product",
+     *      tags={"PublicPageController"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *           type="int"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *      )
+     * )
+     */
     public function edit_product_page(int $id){
         return Inertia::render("Product/CRUD", [
             "product" =>  Product::find($id),
@@ -21,7 +57,21 @@ class PublicPageController extends Controller
             "canInsert" => false
         ]);
     }
-
+    
+    /**
+     * @OA\Get(
+     *      path="/create",
+     *      summary="Get the create page. In there you can create product",
+     *      tags={"PublicPageController"},
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *      )
+     * )
+     */
     public function create_product_page(){
         $p = new Product();
         $p->id = -1;
@@ -37,7 +87,29 @@ class PublicPageController extends Controller
             "canInsert" => true
         ]);
     }
-
+    
+    /**
+     * @OA\Get(
+     *      path="/show/{id}",
+     *      summary="Get the detail page. In there you only show the product",
+     *      tags={"PublicPageController"},
+     *      @OA\Parameter(
+     *          name="id",
+     *          in="query",
+     *          required=true,
+     *          @OA\Schema(
+     *           type="int"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="OK",
+     *          @OA\MediaType(
+     *              mediaType="application/json"
+     *          )
+     *      )
+     * )
+     */
     public function show_product_page(int $id){
         return Inertia::render("Product/CRUD",[
             "product" => Product::find($id),

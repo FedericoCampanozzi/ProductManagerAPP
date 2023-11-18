@@ -20,3 +20,6 @@ Route::post('/insert-product', [ProductController::class, 'insert'])->name("prod
 Route::delete('/delete-product', [ProductController::class, 'delete'])->name("product.delete");
 Route::post('/update-product', [ProductController::class, 'update'])->name("product.update");
 /* *********** */
+
+/* SWAGGER */
+/* *********** */
