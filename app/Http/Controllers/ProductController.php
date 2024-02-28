@@ -6,51 +6,97 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 
 class ProductController extends Controller
-{
-    public function index(){
-        $products = Product::all();
-        return view('products.index', ['products' => $products]);
-        
+{    
+    /**
+    * @OA\Get(
+    *      path="/select-product",
+    *      summary="Select all products",
+    *      tags={"ProductPageController"},
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      )
+    * )
+    */
+    public function get()
+    {
+        return response()->json(['products' => Product::all()->toArray()]);
     }
 
-    public function create(){
-        return view('products.create');
+    /**
+    * @OA\Post(
+    *      path="/insert-product",
+    *      summary="Store the product into database",
+    *      tags={"ProductPageController"},
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      )
+    * )
+    */
+    public function insert(Request $request)
+    {
+        $product = new Product();
+        $product->name = $request['product']['name'];
+        $product->qty = $request['product']['qty'];
+        $product->price = $request['product']['price'];
+        $product->description = $request['product']['description'];
+        $product->created_at = new \DateTime();
+        $product->updated_at = new \DateTime();
+        $product->save();
+        return response()->json(['new_location' => '/index']);
     }
 
-    public function store(Request $request){
-        $data = $request->validate([
-            'name' => 'required',
-            'qty' => 'required|numeric',
-            'price' => 'required|decimal:0,2',
-            'description' => 'nullable'
-        ]);
-
-        $newProduct = Product::create($data);
-
-        return redirect(route('product.index'));
-
+    /**
+    * @OA\Post(
+    *      path="/update-product",
+    *      summary="Update the product",
+    *      tags={"ProductPageController"},
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      )
+    * )
+    */
+    public function update(Request $request)
+    {
+        $product = Product::find($request['product']['id']);
+        $product->name = $request['product']['name'];
+        $product->qty = $request['product']['qty'];
+        $product->price = $request['product']['price'];
+        $product->description = $request['product']['description'];
+        $product->updated_at = new \DateTime();
+        $product->update();
+        return response()->json(['new_location' => '/index']);
     }
 
-    public function edit(Product $product){
-        return view('products.edit', ['product' => $product]);
-    }
-
-    public function update(Product $product, Request $request){
-        $data = $request->validate([
-            'name' => 'required',
-            'qty' => 'required|numeric',
-            'price' => 'required|decimal:0,2',
-            'description' => 'nullable'
-        ]);
-
-        $product->update($data);
-
-        return redirect(route('product.index'))->with('success', 'Product Updated Succesffully');
-
-    }
-
-    public function destroy(Product $product){
+    /**
+    * @OA\Delete(
+    *      path="/delete-product",
+    *      summary="Delete the product",
+    *      tags={"ProductPageController"},
+    *      @OA\Response(
+    *          response=200,
+    *          description="OK",
+    *          @OA\MediaType(
+    *              mediaType="application/json"
+    *          )
+    *      )
+    * )
+    */
+    public function delete(Request $request)
+    {
+        $product = Product::find($request['product']['id']);
         $product->delete();
-        return redirect(route('product.index'))->with('success', 'Product deleted Succesffully');
+        return response()->json(['new_location' => '/index']);
     }
 }

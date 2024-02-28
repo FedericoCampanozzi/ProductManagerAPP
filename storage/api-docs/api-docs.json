@@ -1,0 +1,176 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Product Manager APP - API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/select-product": {
+            "get": {
+                "tags": [
+                    "ProductPageController"
+                ],
+                "summary": "Select all products",
+                "operationId": "523eb93834ebc6bdbb61cfd418496c08",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/insert-product": {
+            "post": {
+                "tags": [
+                    "ProductPageController"
+                ],
+                "summary": "Store the product into database",
+                "operationId": "08f9093838ad2dd9345a5130287df2e5",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/update-product": {
+            "post": {
+                "tags": [
+                    "ProductPageController"
+                ],
+                "summary": "Update the product",
+                "operationId": "681361f1ebd8e6a25b2405b818cb8592",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/delete-product": {
+            "delete": {
+                "tags": [
+                    "ProductPageController"
+                ],
+                "summary": "Delete the product",
+                "operationId": "6669efb9201affb6b7727cf426a82cb0",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/": {
+            "get": {
+                "tags": [
+                    "PublicPageController"
+                ],
+                "summary": "Get table with all products",
+                "operationId": "922dcaa65d4625311612067e07e209f2",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/edit/{id}": {
+            "get": {
+                "tags": [
+                    "PublicPageController"
+                ],
+                "summary": "Get the edit page. In there you can update or delete product",
+                "operationId": "e7bda3ee8a4ddaaaf3b097eb3cc18f31",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/create": {
+            "get": {
+                "tags": [
+                    "PublicPageController"
+                ],
+                "summary": "Get the create page. In there you can create product",
+                "operationId": "8421f1017dc870bd84b0209ab618af3a",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/show/{id}": {
+            "get": {
+                "tags": [
+                    "PublicPageController"
+                ],
+                "summary": "Get the detail page. In there you only show the product",
+                "operationId": "a37921176f767bf4ec8fb8871b6a5dab",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "int"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "bearerAuth",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
